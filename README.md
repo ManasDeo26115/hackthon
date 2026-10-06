@@ -8,20 +8,8 @@ A group trip and expense management web application crafted for Indian traveller
 
 ## 👥 Contributors
 
-Thanks to these wonderful people for contributing to **शुभ यात्रा (Shubh Yatra)**:
-
-<a href="https://github.com/ManasDeo26115">
-  <img src="https://github.com/ManasDeo26115.png" width="60px;" alt="Manas Deo" style="border-radius: 50%; border: 2px solid #F97316;"/>
-  <sub><b>Manas Deo</b></sub>
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://github.com/RajAdiiii09-ux">
-  <img src="https://github.com/RajAdiiii09-ux.png" width="60px;" alt="Raj Adiiii" style="border-radius: 50%; border: 2px solid #FBBF24;"/>
-  <sub><b>Raj Adiiii</b></sub>
-</a>
-
 - **Manas Deo** ([@ManasDeo26115](https://github.com/ManasDeo26115)) - Creator & Lead Developer
-- **Raj Adiiii** ([@RajAdiiii09-ux](https://github.com/RajAdiiii09-ux)) - Contributor & UX Specialist
+- **Raj Adiiii** ([@RajAdiiii09-ux](https://github.com/RajAdiiii09-ux)) - Contributor
 
 ---
 
