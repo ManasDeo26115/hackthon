@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { DevanagariLogo } from '../common/DevanagariLogo';
 import {
-  Compass,
   PlusCircle,
   LogIn,
   Vault,
@@ -12,16 +10,10 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
-  CheckCircle2,
   Share2,
-  Users,
-  Wallet,
-  Car,
-  Plane,
-  Train,
-  Check
 } from 'lucide-react';
 import { formatINR } from '../../utils/formatters';
+import { DevanagariLogo } from '../common/DevanagariLogo';
 
 interface LandingPageProps {
   onCreateTripClick: () => void;
@@ -34,7 +26,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onJoinTripClick,
   onExploreDemoClick,
 }) => {
-  // Scroll Progress Bar
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -42,7 +33,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     restDelta: 0.001
   });
 
-  // Interactive Problem Section - Forgotten Money Jar State
   const [jarTotal, setJarTotal] = useState(0);
   const tinyItems = [
     { name: '🛣️ Toll Tax', amount: 120, color: 'bg-amber-100 text-amber-800' },
@@ -67,29 +57,29 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   const steps = [
     {
       num: '01',
-      title: 'यात्रा बनाएँ (Create Trip)',
-      desc: 'नाम, स्थान, तारीख और बजट डालें। 1-क्लिक में यूनिक Trip ID जनरेट करें।',
+      title: 'Create Trip',
+      desc: 'Enter trip name, location, dates and budget. Generate a unique 8-character Trip ID in 1 click.',
       icon: PlusCircle,
       tag: 'Step 1'
     },
     {
       num: '02',
-      title: 'Trip ID शेयर करें (Share Trip ID)',
-      desc: 'अपने दोस्तों के साथ WhatsApp या लिंक के ज़रिए GOA26X91 जैसा ID शेयर करें।',
+      title: 'Share Trip ID',
+      desc: 'Share your Trip ID (e.g. GOA26X91) with your group via WhatsApp or link.',
       icon: Share2,
       tag: 'Step 2'
     },
     {
       num: '03',
-      title: 'होस्ट की मंज़ूरी (Host Approves)',
-      desc: '👑 होस्ट हर रिक्वेस्ट को चेक करके मंज़ूरी देता है। सुरक्षित और निजी।',
+      title: 'Host Approves',
+      desc: 'The 👑 Trip Host reviews each join request for maximum privacy and control.',
       icon: ShieldCheck,
       tag: 'Step 3'
     },
     {
       num: '04',
-      title: 'हर रुपए का हिसाब (Track Every Rupee)',
-      desc: 'छोटे-बड़े हर खर्च को तुरंत जोड़ें। तिजोरी, बजट अलर्ट और फाइनल हिसाब ऑटोमेटिक!',
+      title: 'Track Every Rupee',
+      desc: 'Add large & tiny expenses instantly. Trip Vault, budget warnings, and final settlement update live!',
       icon: Scale,
       tag: 'Step 4'
     }
@@ -103,7 +93,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         style={{ scaleX }}
       />
 
-      {/* Floating Diya Spark Background Particles */}
       <div className="absolute inset-0 mandala-pattern opacity-40 pointer-events-none" />
 
       {/* Hero Section */}
@@ -117,7 +106,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-saffron-500/30 text-saffron-700 dark:text-amber-300 text-sm font-semibold mb-6 shadow-sm backdrop-blur-md"
           >
             <Sparkles className="w-4 h-4 text-amber-500 animate-spin-slow" />
-            <span>स्वागत है आपकी यात्रा में 🙏</span>
+            <span>Welcome to your trip 🙏</span>
           </motion.div>
 
           {/* Hero Devanagari Title & Subtitle */}
@@ -137,19 +126,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </p>
           </motion.div>
 
-          {/* Hindi Slogan & English Tagline */}
+          {/* English Tagline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="max-w-3xl mx-auto space-y-2 mt-4"
           >
-            <h2 className="font-devanagari text-2xl sm:text-4xl font-extrabold text-slate-800 dark:text-amber-100">
-              "हर सफ़र, हर रुपया – हिसाब में"
-            </h2>
-            <p className="text-base sm:text-xl font-medium text-slate-600 dark:text-slate-300">
+            <h2 className="font-sans text-2xl sm:text-4xl font-extrabold text-slate-800 dark:text-amber-100">
               Every Trip. Every Rupee. Accounted For.
-            </p>
+            </h2>
           </motion.div>
 
           {/* Main Action Buttons */}
@@ -164,7 +150,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-saffron-500 via-amber-500 to-saffron-600 text-white font-extrabold text-lg shadow-glow-saffron hover:shadow-glow-gold hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 group"
             >
               <PlusCircle className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
-              <span>यात्रा बनाएँ (Create Trip)</span>
+              <span>Create Trip</span>
             </button>
 
             <button
@@ -172,7 +158,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               className="w-full sm:w-auto px-8 py-4 rounded-2xl glass-card text-slate-800 dark:text-slate-100 font-extrabold text-lg shadow-lg hover:border-amber-400 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3"
             >
               <LogIn className="w-6 h-6 text-amber-500" />
-              <span>यात्रा से जुड़ें (Join Trip)</span>
+              <span>Join Trip</span>
             </button>
 
             <button
@@ -184,7 +170,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </button>
           </motion.div>
 
-          {/* Floating Glassmorphism Hero Showcase Cards */}
+          {/* Floating Hero Showcase Cards */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -216,7 +202,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Vault className="w-5 h-5 text-amber-500" />
-                  <span className="font-bold text-sm text-slate-800 dark:text-slate-200">सामूहिक तिजोरी</span>
+                  <span className="font-bold text-sm text-slate-800 dark:text-slate-200">Trip Vault</span>
                 </div>
                 <span className="text-xs text-emerald-500 font-bold">5 Members</span>
               </div>
@@ -224,7 +210,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 ₹10,000 <span className="text-xs text-slate-500 font-normal">pool fund</span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-3">
-                Each member contributed ₹2,000 upfront. Pay toll, parking & chai directly from pool!
+                Each member contributed ₹2,000 upfront. Pay toll, parking & snacks directly from pool!
               </p>
             </div>
 
@@ -243,7 +229,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <span className="px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-amber-300">🍿 Chai ₹90</span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-4">
-                No complex forms! Just tap preset icon & amount. Saved in 5 seconds.
+                No complex forms! Just tap preset icon & amount. Saved in under 5 seconds.
               </p>
             </div>
           </motion.div>
@@ -269,8 +255,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <AlertTriangle className="w-4 h-4" />
             The Small Expense Problem
           </div>
-          <h2 className="font-devanagari text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">
-            "टोल का ₹120 किसने दिया? पानी की बोतल का ₹40 कौन भूल गया?"
+          <h2 className="font-sans text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">
+            "Who paid for the toll? Who bought the water?"
           </h2>
           <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mt-4 text-base sm:text-lg">
             Big bills like hotels are easy to remember. But tiny expenses add up to thousands of forgotten rupees.
@@ -322,7 +308,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   {formatINR(jarTotal)}
                 </span>
                 <p className="text-xs text-slate-400 mt-2">
-                  With <span className="font-bold text-slate-700 dark:text-slate-200">शुभ यात्रा</span>, not a single rupee is lost!
+                  With <span className="font-bold text-slate-700 dark:text-slate-200">Shubh Yatra</span>, not a single rupee is lost!
                 </p>
               </div>
             </div>
@@ -335,10 +321,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="px-3 py-1 rounded-full bg-saffron-100 dark:bg-saffron-950 text-saffron-700 dark:text-amber-400 text-xs font-bold uppercase tracking-wider">
-              4 आसान स्टेप्स / How It Works
+              How It Works
             </span>
-            <h2 className="font-devanagari text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mt-3">
-              सफ़र शुरू करना बेहद आसान है
+            <h2 className="font-sans text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mt-3">
+              Getting Started is Super Simple
             </h2>
             <p className="text-slate-600 dark:text-slate-400 mt-2">
               No complex registration. Create a trip in seconds and share with your gang.
@@ -365,7 +351,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                       <Icon className="w-6 h-6" />
                     </div>
                   </div>
-                  <h3 className="font-devanagari text-xl font-bold text-slate-900 dark:text-white mb-2">
+                  <h3 className="font-sans text-xl font-bold text-slate-900 dark:text-white mb-2">
                     {step.title}
                   </h3>
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -382,8 +368,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       <section className="py-20 bg-amber-500/5 dark:bg-slate-900/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="font-devanagari text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">
-              भारतीय यात्रियों के लिए विशेष फीचर्स
+            <h2 className="font-sans text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">
+              Tailored Features for Group Travel
             </h2>
             <p className="text-slate-600 dark:text-slate-400 mt-2">
               Designed for roadtrips, hill stations, beaches, and group adventures.
@@ -396,7 +382,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <Vault className="w-6 h-6" />
               </div>
               <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-1">
-                सामूहिक तिजोरी (Trip Vault)
+                Trip Vault
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400">
                 Collect initial pool contributions upfront. Spend directly for common group expenses without hassle.
@@ -408,7 +394,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <Receipt className="w-6 h-6" />
               </div>
               <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-1">
-                5-सेकंड क्विक खर्च
+                5-Second Quick Expenses
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400">
                 Water bottles, tolls, snacks & tea. Tap big emoji chips to record expenses in under 5 seconds!
@@ -420,7 +406,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <AlertTriangle className="w-6 h-6" />
               </div>
               <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-1">
-                स्मार्ट बजट अलर्ट
+                Smart Budget Warnings
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400">
                 Live color-changing progress ring. Green below 75%, Amber near limit, Red pulse on over-budget.
@@ -432,7 +418,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 <Scale className="w-6 h-6" />
               </div>
               <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-1">
-                फाइनल हिसाब & UPI
+                Final Settlement & UPI
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400">
                 Optimal "Who owes whom" calculation algorithm. Pay via UPI link & download print summary report!
@@ -442,15 +428,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* Footer Slogan */}
+      {/* Footer Tagline */}
       <footer className="py-12 bg-slate-900 text-white text-center border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center gap-4">
           <DevanagariLogo size="md" showSubtitle={true} />
-          <p className="font-devanagari text-xl font-bold text-amber-300">
-            "हर सफ़र, हर रुपया – हिसाब में"
+          <p className="font-sans text-xl font-bold text-amber-300">
+            Every Trip. Every Rupee. Accounted For.
           </p>
           <p className="text-xs text-slate-400">
-            © 2026 शुभ यात्रा (Shubh Yatra). Built with ❤️ for Indian Travellers.
+            © 2026 Shubh Yatra. Built with ❤️ for Group Travellers.
           </p>
         </div>
       </footer>

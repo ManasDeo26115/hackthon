@@ -55,12 +55,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
   const navItems = [
-    { id: 'dashboard', label: 'डैशबोर्ड / Dashboard', icon: LayoutDashboard },
-    { id: 'add-expense', label: 'खर्च जोड़ें / Add Expense', icon: Receipt },
-    { id: 'vault', label: 'तिजोरी / Vault', icon: Vault },
-    { id: 'planner', label: 'प्लानर / Planner', icon: CalendarCheck },
-    { id: 'history', label: 'इतिहास / History', icon: History },
-    { id: 'settlement', label: 'हिसाब / Settlement', icon: Scale },
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'add-expense', label: 'Add Expense', icon: Receipt },
+    { id: 'vault', label: 'Trip Vault', icon: Vault },
+    { id: 'planner', label: 'Planner', icon: CalendarCheck },
+    { id: 'history', label: 'History', icon: History },
+    { id: 'settlement', label: 'Settlement', icon: Scale },
   ];
 
   return (
@@ -82,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Sparkles className="w-3.5 h-3.5" />
-            Landing
+            Home
           </button>
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -98,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
-                <span>{item.label.split(' / ')[0]}</span>
+                <span>{item.label}</span>
               </button>
             );
           })}
@@ -119,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {tripDropdownOpen && (
               <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-slate-800 shadow-2xl border border-slate-200 dark:border-slate-700 p-2 z-50 animate-in fade-in slide-in-from-top-2">
                 <div className="text-[11px] font-bold text-slate-400 dark:text-slate-500 px-3 py-1 uppercase tracking-wider">
-                  आपके सफ़र / Your Trips
+                  Your Trips
                 </div>
                 <div className="space-y-1 my-1">
                   {allTrips.map((t) => (
@@ -152,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-saffron-600 dark:text-amber-400 hover:bg-saffron-50 dark:hover:bg-saffron-950/30 flex items-center gap-2"
                   >
                     <PlusCircle className="w-4 h-4" />
-                    <span>नई यात्रा बनाएं (Create Trip)</span>
+                    <span>Create Trip</span>
                   </button>
 
                   <button
@@ -163,14 +163,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 flex items-center gap-2"
                   >
                     <LogIn className="w-4 h-4 text-amber-500" />
-                    <span>यात्रा से जुड़ें (Join Trip)</span>
+                    <span>Join Trip</span>
                   </button>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Pending Host Approval Requests Button (Only visible if active trip host) */}
+          {/* Pending Host Approvals */}
           {activeTrip && currentUser.role === 'host' && (
             <button
               onClick={onOpenHostApprovalModal}
@@ -178,7 +178,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="relative p-2 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-300 hover:bg-amber-100 transition-all flex items-center gap-1 text-xs font-bold"
             >
               <Users className="w-4 h-4" />
-              <span className="hidden sm:inline">मंज़ूरी</span>
+              <span className="hidden sm:inline">Approvals</span>
               {pendingRequestsCount > 0 && (
                 <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center animate-bounce shadow-md">
                   {pendingRequestsCount}
@@ -187,7 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           )}
 
-          {/* User Role Switcher Dropdown (To test Host vs Member permissions) */}
+          {/* User Role Switcher */}
           <div className="relative">
             <button
               onClick={() => setUserDropdownOpen(!userDropdownOpen)}
@@ -207,7 +207,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {userDropdownOpen && (
               <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-white dark:bg-slate-800 shadow-2xl border border-slate-200 dark:border-slate-700 p-2 z-50">
                 <div className="text-[11px] font-bold text-slate-400 dark:text-slate-500 px-3 py-1 uppercase tracking-wider">
-                  सदस्य बदलें / Switch Role
+                  Switch User Profile
                 </div>
                 <div className="space-y-1 my-1">
                   {activeTrip?.members.map((m) => (

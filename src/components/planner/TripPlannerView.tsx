@@ -9,12 +9,6 @@ import {
   Trash2,
   Check,
   Clock,
-  Square,
-  Sparkles,
-  Plane,
-  Train,
-  Building,
-  Briefcase
 } from 'lucide-react';
 import { formatDate } from '../../utils/formatters';
 
@@ -42,7 +36,6 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
   const [activeTab, setActiveTab] = useState<'reminders' | 'checklist' | 'places'>('reminders');
   const isHost = currentUser.role === 'host';
 
-  // Forms State
   const [remTitle, setRemTitle] = useState('');
   const [remDate, setRemDate] = useState(trip.startDate);
   const [remTime, setRemTime] = useState('12:00');
@@ -54,7 +47,6 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
   const [plcName, setPlcName] = useState('');
   const [plcNotes, setPlcNotes] = useState('');
 
-  // Reminder add handler
   const handleAddReminder = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isHost || !remTitle) return;
@@ -79,7 +71,6 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
     onUpdateReminders(reminders.filter((r) => r.id !== id));
   };
 
-  // Checklist toggle & add handler
   const handleToggleChecklist = (id: string) => {
     onUpdateChecklist(
       checklist.map((c) => (c.id === id ? { ...c, completed: !c.completed } : c))
@@ -107,7 +98,6 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
     onUpdateChecklist(checklist.filter((c) => c.id !== id));
   };
 
-  // Places toggle & add handler
   const handleTogglePlace = (id: string) => {
     onUpdatePlaces(
       places.map((p) => (p.id === id ? { ...p, visited: !p.visited } : p))
@@ -138,23 +128,21 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
 
   return (
     <div className="space-y-6 pb-20">
-      {/* Header Banner with Role Status */}
       <div className="glass-card p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden border-saffron-500/20">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-saffron-500/10 text-saffron-700 dark:text-amber-300 text-xs font-bold mb-2">
               <Calendar className="w-4 h-4 text-saffron-500" />
-              <span>ट्रिप प्लानर / Trip Planner</span>
+              <span>Trip Planner</span>
             </div>
-            <h1 className="font-devanagari text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
-              रिमाइंडर, चेकलिस्ट और घूमने की जगहें
+            <h1 className="font-sans text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
+              Reminders, Checklists & Places
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
               Organize train departures, flight check-ins, ID documents, and tourist places to visit.
             </p>
           </div>
 
-          {/* Role Indicator Badge */}
           <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs font-bold">
             {isHost ? (
               <span className="text-saffron-600 dark:text-amber-400 flex items-center gap-1.5">
@@ -169,7 +157,6 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
           </div>
         </div>
 
-        {/* Tab Switcher Bar */}
         <div className="flex items-center gap-2 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
           <button
             onClick={() => setActiveTab('reminders')}
@@ -180,7 +167,7 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
             }`}
           >
             <Clock className="w-4 h-4" />
-            <span>रिमाइंडर ({reminders.length})</span>
+            <span>Reminders ({reminders.length})</span>
           </button>
 
           <button
@@ -192,7 +179,7 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
             }`}
           >
             <CheckSquare className="w-4 h-4" />
-            <span>चेकलिस्ट ({checklist.length})</span>
+            <span>Checklist ({checklist.length})</span>
           </button>
 
           <button
@@ -204,20 +191,18 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
             }`}
           >
             <MapPin className="w-4 h-4" />
-            <span>घूमने की जगहें ({places.length})</span>
+            <span>Places to Visit ({places.length})</span>
           </button>
         </div>
       </div>
 
-      {/* TAB 1: REMINDERS */}
       {activeTab === 'reminders' && (
         <div className="space-y-6">
-          {/* Host Add Reminder Form */}
           {isHost && (
             <div className="glass-card p-6 rounded-3xl shadow-lg border-amber-400/30">
               <h3 className="font-bold text-sm text-slate-900 dark:text-white mb-3 flex items-center gap-2">
                 <Plus className="w-4 h-4 text-saffron-500" />
-                <span>नया रिमाइंडर जोड़ें (Add Reminder - Host Only)</span>
+                <span>Add Reminder (Host Only)</span>
               </h3>
               <form onSubmit={handleAddReminder} className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <input
@@ -226,13 +211,13 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
                   placeholder="e.g. Flight Departure from Mumbai"
                   value={remTitle}
                   onChange={(e) => setRemTitle(e.target.value)}
-                  className="sm:col-span-2 px-4 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold"
+                  className="sm:col-span-2 px-4 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-900 dark:text-white"
                 />
                 <input
                   type="date"
                   value={remDate}
                   onChange={(e) => setRemDate(e.target.value)}
-                  className="px-3 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold"
+                  className="px-3 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-900 dark:text-white"
                 />
                 <button
                   type="submit"
@@ -244,7 +229,6 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
             </div>
           )}
 
-          {/* Reminders List */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {reminders.map((rem) => (
               <div
@@ -284,14 +268,13 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
         </div>
       )}
 
-      {/* TAB 2: CHECKLIST */}
       {activeTab === 'checklist' && (
         <div className="space-y-6">
           {isHost && (
             <div className="glass-card p-6 rounded-3xl shadow-lg border-amber-400/30">
               <h3 className="font-bold text-sm text-slate-900 dark:text-white mb-3 flex items-center gap-2">
                 <Plus className="w-4 h-4 text-saffron-500" />
-                <span>सामान की लिस्ट में जोड़ें (Add Item - Host Only)</span>
+                <span>Add Checklist Item (Host Only)</span>
               </h3>
               <form onSubmit={handleAddChecklist} className="flex gap-3">
                 <input
@@ -300,7 +283,7 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
                   placeholder="e.g. Original Driving License & Sunscreen"
                   value={chkText}
                   onChange={(e) => setChkText(e.target.value)}
-                  className="flex-1 px-4 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold"
+                  className="flex-1 px-4 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-900 dark:text-white"
                 />
                 <button
                   type="submit"
@@ -349,14 +332,13 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
         </div>
       )}
 
-      {/* TAB 3: PLACES TO VISIT */}
       {activeTab === 'places' && (
         <div className="space-y-6">
           {isHost && (
             <div className="glass-card p-6 rounded-3xl shadow-lg border-amber-400/30">
               <h3 className="font-bold text-sm text-slate-900 dark:text-white mb-3 flex items-center gap-2">
                 <Plus className="w-4 h-4 text-saffron-500" />
-                <span>घूमने की नई जगह जोड़ें (Add Place - Host Only)</span>
+                <span>Add Place (Host Only)</span>
               </h3>
               <form onSubmit={handleAddPlace} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input
@@ -365,14 +347,14 @@ export const TripPlannerView: React.FC<TripPlannerViewProps> = ({
                   placeholder="e.g. Dudhsagar Waterfalls"
                   value={plcName}
                   onChange={(e) => setPlcName(e.target.value)}
-                  className="px-4 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold"
+                  className="px-4 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-900 dark:text-white"
                 />
                 <input
                   type="text"
                   placeholder="Notes (e.g. Sunset point)"
                   value={plcNotes}
                   onChange={(e) => setPlcNotes(e.target.value)}
-                  className="px-4 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold"
+                  className="px-4 py-2.5 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-900 dark:text-white"
                 />
                 <button
                   type="submit"

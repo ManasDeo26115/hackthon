@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Trip, VaultContribution, Expense, User } from '../../types';
 import { formatINR, formatDate } from '../../utils/formatters';
-import { Vault, PlusCircle, Check, ArrowDownLeft, ShieldCheck, History, X } from 'lucide-react';
+import { Vault, PlusCircle, ArrowDownLeft, ShieldCheck, History, X } from 'lucide-react';
 
 interface TripVaultViewProps {
   trip: Trip;
@@ -60,10 +60,10 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-300 text-xs font-bold mb-2">
               <Vault className="w-4 h-4 text-amber-500" />
-              <span>सामूहिक तिजोरी (Trip Vault)</span>
+              <span>Trip Vault</span>
             </div>
-            <h1 className="font-devanagari text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
-              ग्रुप का कॉमन पूल फंड
+            <h1 className="font-sans text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
+              Group Common Pool Fund
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
               Collect initial pool money upfront. Pay for tolls, snacks, tea & water directly without individual payments.
@@ -75,7 +75,7 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
             className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-saffron-500 text-white font-extrabold text-sm shadow-glow-gold hover:scale-105 transition-all flex items-center justify-center gap-2"
           >
             <PlusCircle className="w-5 h-5" />
-            <span>राशि जोड़ें (Add Pool Money)</span>
+            <span>Add Pool Money</span>
           </button>
         </div>
 
@@ -84,28 +84,27 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
           <div className="md:col-span-2 space-y-4">
             <div className="grid grid-cols-3 gap-3 text-center">
               <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
-                <span className="text-[11px] font-semibold text-slate-400 block">कुल जमा Pool</span>
+                <span className="text-[11px] font-semibold text-slate-400 block">Total Pool</span>
                 <span className="text-xl font-black text-slate-900 dark:text-white block mt-1">
                   {formatINR(totalContributions)}
                 </span>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-purple-50 dark:bg-purple-950/40">
-                <span className="text-[11px] font-semibold text-purple-600 dark:text-purple-300 block">तिजोरी खर्च</span>
+                <span className="text-[11px] font-semibold text-purple-600 dark:text-purple-300 block">Vault Spent</span>
                 <span className="text-xl font-black text-purple-600 dark:text-purple-300 block mt-1">
                   {formatINR(vaultExpensesTotal)}
                 </span>
               </div>
 
               <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40">
-                <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-300 block">बची राशि</span>
+                <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-300 block">Remaining</span>
                 <span className="text-xl font-black text-emerald-600 dark:text-emerald-300 block mt-1">
                   {formatINR(vaultBalance)}
                 </span>
               </div>
             </div>
 
-            {/* Rising Level Animation Meter */}
             <div className="space-y-1">
               <div className="flex justify-between text-xs font-bold text-slate-500">
                 <span>Vault Level ({fillPercentage}%)</span>
@@ -120,7 +119,6 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
             </div>
           </div>
 
-          {/* Animated Coin Fill Visual */}
           <div className="glass-card p-4 rounded-3xl text-center border-amber-400/40 shadow-inner flex flex-col items-center justify-center">
             <span className="text-5xl mb-2">💰</span>
             <span className="text-xs font-bold text-amber-600 dark:text-amber-400">
@@ -133,11 +131,10 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
         </div>
       </div>
 
-      {/* Member Contributions Breakdown Table */}
       <div className="glass-card p-6 rounded-3xl shadow-xl border-saffron-500/20">
-        <h3 className="font-devanagari font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+        <h3 className="font-sans font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2">
           <ShieldCheck className="w-5 h-5 text-saffron-500" />
-          <span>सदस्यों का योगदान / Member Contributions</span>
+          <span>Member Contributions</span>
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -170,11 +167,10 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
         </div>
       </div>
 
-      {/* Vault Expense Log */}
       <div className="glass-card p-6 rounded-3xl shadow-xl border-purple-500/20">
-        <h3 className="font-devanagari font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+        <h3 className="font-sans font-bold text-lg text-slate-900 dark:text-white mb-4 flex items-center gap-2">
           <History className="w-5 h-5 text-purple-500" />
-          <span>तिजोरी से भुगतान किए गए खर्च / Vault Expenses Log</span>
+          <span>Vault Expenses Log</span>
         </h3>
 
         {vaultExpenses.length === 0 ? (
@@ -211,7 +207,6 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
         )}
       </div>
 
-      {/* Modal to Add Vault Contribution */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md animate-in fade-in">
           <div className="relative w-full max-w-md glass-card rounded-3xl shadow-2xl p-6 sm:p-8 border border-amber-400/30">
@@ -226,15 +221,15 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
               <span className="p-2 rounded-xl bg-amber-500/10 text-amber-600">
                 <Vault className="w-5 h-5" />
               </span>
-              <h2 className="font-devanagari text-2xl font-black text-slate-900 dark:text-white">
-                तिजोरी में राशि जोड़ें (Add Pool Deposit)
+              <h2 className="font-sans text-2xl font-black text-slate-900 dark:text-white">
+                Add Pool Deposit
               </h2>
             </div>
 
             <form onSubmit={handleAddSubmit} className="space-y-4 mt-4">
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  सदस्य चुनें / Member *
+                  Member *
                 </label>
                 <select
                   value={selectedUser}
@@ -251,7 +246,7 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  राशि / Amount (₹) *
+                  Amount (₹) *
                 </label>
                 <input
                   type="number"
@@ -266,7 +261,7 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  नोट्स / Notes
+                  Notes
                 </label>
                 <input
                   type="text"
@@ -280,7 +275,7 @@ export const TripVaultView: React.FC<TripVaultViewProps> = ({
                 type="submit"
                 className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-saffron-500 text-white font-extrabold text-base shadow-glow-gold hover:scale-[1.02] active:scale-95 transition-all mt-2"
               >
-                राशि जमा करें (Deposit Funds) 💰
+                Deposit Funds 💰
               </button>
             </form>
           </div>

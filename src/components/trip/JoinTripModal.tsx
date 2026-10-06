@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Trip, JoinRequest } from '../../types';
-import { X, LogIn, Clock, AlertCircle, CheckCircle2, Search } from 'lucide-react';
+import { X, LogIn, Clock, AlertCircle, Search } from 'lucide-react';
 
 interface JoinTripModalProps {
   isOpen: boolean;
@@ -66,8 +66,8 @@ export const JoinTripModal: React.FC<JoinTripModalProps> = ({
               <span className="p-2 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
                 <LogIn className="w-5 h-5" />
               </span>
-              <h2 className="font-devanagari text-2xl font-black text-slate-900 dark:text-white">
-                यात्रा से जुड़ें (Join Trip)
+              <h2 className="font-sans text-2xl font-black text-slate-900 dark:text-white">
+                Join Trip
               </h2>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 mb-6">
@@ -102,7 +102,7 @@ export const JoinTripModal: React.FC<JoinTripModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  आपका नाम / Your Name *
+                  Your Name *
                 </label>
                 <input
                   type="text"
@@ -116,7 +116,7 @@ export const JoinTripModal: React.FC<JoinTripModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  फ़ोन नंबर / Mobile Number
+                  Mobile Number
                 </label>
                 <input
                   type="tel"
@@ -131,19 +131,18 @@ export const JoinTripModal: React.FC<JoinTripModalProps> = ({
                 type="submit"
                 className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-saffron-500 to-amber-600 text-white font-extrabold text-base shadow-glow-gold hover:scale-[1.02] active:scale-95 transition-all mt-2"
               >
-                जुड़ने के लिए रिक्वेस्ट भेजें (Request to Join) 📩
+                Request to Join 📩
               </button>
             </form>
           </div>
         ) : (
-          /* Waiting for Host Approval Screen */
           <div className="text-center py-4 space-y-4 animate-in zoom-in-95">
             <div className="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-300 mx-auto flex items-center justify-center border-2 border-amber-400">
               <Clock className="w-8 h-8 animate-spin-slow" />
             </div>
 
-            <h3 className="font-devanagari text-2xl font-black text-slate-900 dark:text-white">
-              होस्ट की मंज़ूरी का इंतज़ार ⏳
+            <h3 className="font-sans text-2xl font-black text-slate-900 dark:text-white">
+              Waiting for Host Approval ⏳
             </h3>
 
             <div className="p-4 rounded-2xl bg-amber-50 dark:bg-slate-800 border border-amber-200 dark:border-amber-700 text-left text-xs space-y-1">
@@ -163,7 +162,7 @@ export const JoinTripModal: React.FC<JoinTripModalProps> = ({
               onClick={onClose}
               className="w-full py-3 rounded-2xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition-all"
             >
-              ठीक है (Got It)
+              Got It
             </button>
           </div>
         )}

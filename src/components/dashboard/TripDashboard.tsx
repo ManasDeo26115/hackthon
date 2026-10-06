@@ -13,13 +13,10 @@ import {
   PlusCircle,
   Vault,
   Receipt,
-  AlertTriangle,
+  MapPin,
   Calendar,
   CheckSquare,
-  MapPin,
-  Sparkles,
   ArrowUpRight,
-  ShieldCheck,
   TrendingUp,
   Tag
 } from 'lucide-react';
@@ -60,31 +57,26 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
   onOpenPlanner,
   onOpenHistory,
   onOpenSettlement,
-  currentUser,
   onShareTrip
 }) => {
   const { totalSpent, vaultBalance, vaultTotalContributions, vaultExpensesTotal } = financials;
   const remainingBudget = trip.expectedBudget - totalSpent;
   const spentPercentage = Math.min(100, Math.round((totalSpent / trip.expectedBudget) * 100));
 
-  // Determine Budget Status Color & Warning State
   let budgetColorClass = 'text-emerald-500 bg-emerald-500';
-  let budgetBadgeText = 'सुरक्षित बजट (Safe Budget)';
+  let budgetBadgeText = 'Safe Budget';
   let budgetBorderClass = 'border-emerald-500/30';
-  let isOverBudget = false;
 
   if (spentPercentage >= 100) {
     budgetColorClass = 'text-red-500 bg-red-500';
-    budgetBadgeText = '🚨 बजट पार! (Over Budget)';
+    budgetBadgeText = '🚨 Over Budget!';
     budgetBorderClass = 'border-red-500 animate-pulse-red';
-    isOverBudget = true;
   } else if (spentPercentage >= 75) {
     budgetColorClass = 'text-amber-500 bg-amber-500';
-    budgetBadgeText = '⚠️ बजट चेतावनी (Near Limit)';
+    budgetBadgeText = '⚠️ Near Limit';
     budgetBorderClass = 'border-amber-500/60';
   }
 
-  // Category Breakdown Data for Recharts Donut
   const categoryTotals: Record<string, number> = {
     Travel: 0,
     Fooding: 0,
@@ -153,7 +145,7 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
               </button>
             </div>
 
-            <h1 className="font-devanagari text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               {trip.name}
             </h1>
 
@@ -166,7 +158,6 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
             </p>
           </div>
 
-          {/* Member Avatars */}
           <div className="flex items-center gap-3 bg-white/60 dark:bg-slate-900/60 p-3 rounded-2xl border border-slate-200/60 dark:border-slate-800">
             <div className="flex -space-x-2 overflow-hidden">
               {trip.members.map((m) => (
@@ -196,12 +187,11 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
 
       {/* Main Budget & Vault Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Budget Card with Animated Ring */}
         <div className={`glass-card p-6 rounded-3xl shadow-xl relative border-2 ${budgetBorderClass} transition-all`}>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-devanagari font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+            <h3 className="font-sans font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-saffron-500" />
-              <span>बजट समरी / Budget Summary</span>
+              <span>Budget Summary</span>
             </h3>
             <span className={`px-3 py-1 rounded-full text-xs font-extrabold ${budgetBadgeText.includes('🚨') ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-800'}`}>
               {budgetBadgeText}
@@ -210,28 +200,27 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
 
           <div className="grid grid-cols-3 gap-2 text-center my-6">
             <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60">
-              <span className="text-[11px] font-semibold text-slate-400 block">अनुमानित बजट</span>
+              <span className="text-[11px] font-semibold text-slate-400 block">Expected Budget</span>
               <span className="text-lg font-black text-slate-900 dark:text-white block mt-0.5">
                 {formatINR(trip.expectedBudget)}
               </span>
             </div>
 
             <div className="p-3 rounded-2xl bg-saffron-50 dark:bg-saffron-950/40">
-              <span className="text-[11px] font-semibold text-saffron-600 dark:text-amber-400 block">कुल खर्च</span>
+              <span className="text-[11px] font-semibold text-saffron-600 dark:text-amber-400 block">Total Spent</span>
               <span className="text-lg font-black text-saffron-600 dark:text-amber-400 block mt-0.5">
                 {formatINR(totalSpent)}
               </span>
             </div>
 
             <div className={`p-3 rounded-2xl ${remainingBudget < 0 ? 'bg-red-50 dark:bg-red-950/40 text-red-600' : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600'}`}>
-              <span className="text-[11px] font-semibold block">शेष बजट</span>
+              <span className="text-[11px] font-semibold block">Remaining Budget</span>
               <span className="text-lg font-black block mt-0.5">
                 {formatINR(remainingBudget)}
               </span>
             </div>
           </div>
 
-          {/* Budget Animated Progress Bar */}
           <div className="space-y-1.5">
             <div className="flex justify-between text-xs font-bold text-slate-500">
               <span>Spent {spentPercentage}%</span>
@@ -246,19 +235,18 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
           </div>
         </div>
 
-        {/* Trip Vault Card */}
         <div className="glass-card p-6 rounded-3xl shadow-xl relative border-amber-400/30">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-devanagari font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+            <h3 className="font-sans font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
               <Vault className="w-5 h-5 text-amber-500" />
-              <span>सामूहिक तिजोरी / Trip Vault</span>
+              <span>Trip Vault</span>
             </h3>
             <button
               onClick={onAddVaultContribution}
               className="px-3 py-1.5 rounded-xl bg-amber-500 text-white text-xs font-bold shadow-md hover:bg-amber-600 transition-all flex items-center gap-1"
             >
               <PlusCircle className="w-3.5 h-3.5" />
-              <span>राशि जोड़ें (Add Pool)</span>
+              <span>Add Pool Money</span>
             </button>
           </div>
 
@@ -272,7 +260,6 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
             </p>
           </div>
 
-          {/* Per-member Contribution Avatars Bar */}
           <div className="border-t border-slate-100 dark:border-slate-800 pt-4">
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
               Member Pool Contributions
@@ -300,10 +287,9 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
 
       {/* Category Spending Donut Chart & Quick Tiny Expense Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Category Breakdown Donut Chart */}
         <div className="glass-card p-6 rounded-3xl shadow-xl lg:col-span-1 border-saffron-500/20">
-          <h3 className="font-devanagari font-bold text-lg text-slate-900 dark:text-white mb-2">
-            श्रेणीवार खर्च / Category Wise
+          <h3 className="font-sans font-bold text-lg text-slate-900 dark:text-white mb-2">
+            Category Wise Spending
           </h3>
           {pieData.length > 0 ? (
             <div className="h-56 relative flex items-center justify-center">
@@ -355,13 +341,12 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
           </div>
         </div>
 
-        {/* Quick Tiny Expense Row & Actions */}
         <div className="glass-card p-6 rounded-3xl shadow-xl lg:col-span-2 border-amber-400/30 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-devanagari font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+              <h3 className="font-sans font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
                 <Tag className="w-5 h-5 text-saffron-500" />
-                <span>क्विक छोटे खर्च / Quick Tiny Expenses (5-Sec)</span>
+                <span>Quick Tiny Expenses (5-Sec)</span>
               </h3>
               <button
                 onClick={onQuickAddExpense}
@@ -374,7 +359,6 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
               Tap any chip below to quickly record small roadtrip expenses like toll, water bottle & parking!
             </p>
 
-            {/* Big Tappable Emoji Chips */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {quickTinyExpenses.map((chip, idx) => (
                 <button
@@ -397,7 +381,7 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
               className="flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-saffron-500 to-amber-500 text-white font-extrabold text-xs shadow-md hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <PlusCircle className="w-4 h-4" />
-              <span>नया खर्च जोड़ें (+ Add Expense)</span>
+              <span>+ Add Expense</span>
             </button>
 
             <button
@@ -405,7 +389,7 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
               className="flex-1 py-3 px-4 rounded-2xl bg-slate-900 dark:bg-amber-400 text-white dark:text-slate-950 font-extrabold text-xs shadow-md hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <ArrowUpRight className="w-4 h-4" />
-              <span>फाइनल हिसाब देखें (Settlement)</span>
+              <span>View Settlement</span>
             </button>
           </div>
         </div>
@@ -413,18 +397,17 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
 
       {/* Recent Expenses List & Planner Preview */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Expenses List Widget */}
         <div className="glass-card p-6 rounded-3xl shadow-xl lg:col-span-2 border-saffron-500/20">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-devanagari font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+            <h3 className="font-sans font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
               <Receipt className="w-5 h-5 text-saffron-500" />
-              <span>हाल के खर्च / Recent Expenses</span>
+              <span>Recent Expenses</span>
             </h3>
             <button
               onClick={() => onOpenHistory()}
               className="text-xs font-bold text-saffron-600 dark:text-amber-400 hover:underline"
             >
-              सभी देखें ({expenses.length}) ➡️
+              View All ({expenses.length}) ➡️
             </button>
           </div>
 
@@ -480,13 +463,12 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
           </div>
         </div>
 
-        {/* Planner & Places Quick Widget */}
         <div className="glass-card p-6 rounded-3xl shadow-xl lg:col-span-1 border-amber-400/30 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-devanagari font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+              <h3 className="font-sans font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-amber-500" />
-                <span>रिमाइंडर & स्थान / Planner</span>
+                <span>Planner</span>
               </h3>
               <button
                 onClick={onOpenPlanner}
@@ -496,7 +478,6 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
               </button>
             </div>
 
-            {/* Upcoming Reminders */}
             <div className="space-y-2 mb-4">
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
                 Upcoming Reminders
@@ -511,7 +492,6 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
               ))}
             </div>
 
-            {/* Checklists Preview */}
             <div className="space-y-1.5">
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
                 Things to Carry
@@ -529,7 +509,7 @@ export const TripDashboard: React.FC<TripDashboardProps> = ({
             onClick={onOpenPlanner}
             className="w-full py-2.5 mt-4 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 font-bold text-xs transition-all text-center"
           >
-            पूरा प्लानर खोलें (View Full Planner)
+            View Full Planner
           </button>
         </div>
       </div>

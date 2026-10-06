@@ -3,14 +3,9 @@ import confetti from 'canvas-confetti';
 import { Expense, Category, Trip, User } from '../../types';
 import {
   X,
-  PlusCircle,
-  IndianRupee,
-  Users,
   Check,
   Vault,
-  Tag,
   Zap,
-  Sparkles
 } from 'lucide-react';
 import { formatINR } from '../../utils/formatters';
 
@@ -42,12 +37,12 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
 
   if (!isOpen) return null;
 
-  const categories: { id: Category; label: string; icon: string }[] = [
-    { id: 'Fooding', label: '🍿 खाना / Food', icon: '🍿' },
-    { id: 'Travel', label: '🚗 यात्रा / Travel', icon: '🚗' },
-    { id: 'Hotel', label: '🏨 स्टे / Hotel', icon: '🏨' },
-    { id: 'Activity', label: '🎯 एक्टिविटी / Activity', icon: '🎯' },
-    { id: 'Other', label: '🛍️ अन्य / Other', icon: '🛍️' },
+  const categories: { id: Category; label: string }[] = [
+    { id: 'Fooding', label: '🍿 Food' },
+    { id: 'Travel', label: '🚗 Travel' },
+    { id: 'Hotel', label: '🏨 Hotel' },
+    { id: 'Activity', label: '🎯 Activity' },
+    { id: 'Other', label: '🛍️ Other' },
   ];
 
   const quickPresets = [
@@ -68,7 +63,7 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
 
   const handleToggleMemberApplies = (userId: string) => {
     if (appliesTo.includes(userId)) {
-      if (appliesTo.length === 1) return; // Must apply to at least one
+      if (appliesTo.length === 1) return;
       setAppliesTo(appliesTo.filter((id) => id !== userId));
     } else {
       setAppliesTo([...appliesTo, userId]);
@@ -104,7 +99,6 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
     onSaveExpense(newExpense);
     setSavedSuccess(true);
 
-    // Sparkle effect
     confetti({
       particleCount: 40,
       spread: 50,
@@ -132,8 +126,8 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
           <span className="p-2 rounded-xl bg-saffron-500/10 text-saffron-600 dark:text-amber-400">
             <Zap className="w-5 h-5" />
           </span>
-          <h2 className="font-devanagari text-2xl font-black text-slate-900 dark:text-white">
-            नया खर्च जोड़ें (Add Expense)
+          <h2 className="font-sans text-2xl font-black text-slate-900 dark:text-white">
+            Add Expense
           </h2>
         </div>
         <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
@@ -145,8 +139,8 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
             <div className="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/40">
               <Check className="w-8 h-8 stroke-[3]" />
             </div>
-            <h3 className="font-devanagari text-2xl font-black text-slate-900 dark:text-white">
-              खर्च दर्ज हो गया! (Expense Saved) 🎉
+            <h3 className="font-sans text-2xl font-black text-slate-900 dark:text-white">
+              Expense Saved! 🎉
             </h3>
             <p className="text-xs text-slate-500">
               {title} – {formatINR(parseFloat(amount))} added to dashboard.
@@ -154,7 +148,6 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
           </div>
         ) : (
           <div>
-            {/* Quick 5-Sec Preset Bar */}
             <div className="mb-5 p-3 rounded-2xl bg-amber-50 dark:bg-slate-800/80 border border-amber-200 dark:border-amber-700">
               <span className="text-[10px] font-black text-amber-700 dark:text-amber-300 uppercase tracking-widest block mb-2">
                 ⚡ 5-Second Quick Presets:
@@ -174,10 +167,9 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Category Pills */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  श्रेणी / Category
+                  Category
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {categories.map((cat) => (
@@ -197,11 +189,10 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
                 </div>
               </div>
 
-              {/* Title & Amount */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    खर्च का नाम / Title *
+                    Expense Title *
                   </label>
                   <input
                     type="text"
@@ -215,7 +206,7 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    राशि / Amount (₹) *
+                    Amount (₹) *
                   </label>
                   <div className="relative">
                     <span className="absolute left-4 top-3 text-lg font-bold text-saffron-500">₹</span>
@@ -232,10 +223,9 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
                 </div>
               </div>
 
-              {/* Paid By (Select One Member) */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  किसने भुगतान किया? / Paid By (Select 1)
+                  Paid By (Select 1)
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {trip.members.map((m) => (
@@ -256,11 +246,10 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
                 </div>
               </div>
 
-              {/* Applies To (Multi-select member chips + Split shortcut) */}
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                    किस-किस पर लागू? / Applies To ({appliesTo.length} members)
+                    Applies To ({appliesTo.length} members)
                   </label>
                   <button
                     type="button"
@@ -294,7 +283,6 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
                 </div>
               </div>
 
-              {/* Vault Paid Checkbox */}
               <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
                 <label className="flex items-center gap-3 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer">
                   <input
@@ -305,7 +293,7 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
                   />
                   <span className="flex items-center gap-1.5">
                     <Vault className="w-4 h-4 text-amber-500" />
-                    <span>सामूहिक तिजोरी से भुगतान करें (Pay from Trip Vault 💰)</span>
+                    <span>Pay from Trip Vault 💰</span>
                   </span>
                 </label>
               </div>
@@ -314,7 +302,7 @@ export const AddExpenseModal: React.FC<AddExpenseModalProps> = ({
                 type="submit"
                 className="w-full py-4 rounded-2xl bg-gradient-to-r from-saffron-500 via-amber-500 to-saffron-600 text-white font-extrabold text-base shadow-glow-saffron hover:scale-[1.02] active:scale-95 transition-all mt-4"
               >
-                खर्च सेव करें (Save Expense) 💾
+                Save Expense 💾
               </button>
             </form>
           </div>

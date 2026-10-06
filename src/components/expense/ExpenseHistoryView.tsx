@@ -59,23 +59,20 @@ export const ExpenseHistoryView: React.FC<ExpenseHistoryViewProps> = ({
 
   return (
     <div className="space-y-6 pb-20">
-      {/* Header Card */}
       <div className="glass-card p-6 sm:p-8 rounded-3xl shadow-xl border-saffron-500/20">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-saffron-500/10 text-saffron-700 dark:text-amber-300 text-xs font-bold mb-2">
               <History className="w-4 h-4 text-saffron-500" />
-              <span>खर्च का इतिहास / Expense History</span>
+              <span>Expense History</span>
             </div>
-            <h1 className="font-devanagari text-3xl font-black text-slate-900 dark:text-white">
-              सभी खर्चों की सूची ({filteredExpenses.length})
+            <h1 className="font-sans text-3xl font-black text-slate-900 dark:text-white">
+              All Expenses List ({filteredExpenses.length})
             </h1>
           </div>
         </div>
 
-        {/* Search & Filters */}
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {/* Search Box */}
           <div className="relative sm:col-span-2">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
             <input
@@ -87,7 +84,6 @@ export const ExpenseHistoryView: React.FC<ExpenseHistoryViewProps> = ({
             />
           </div>
 
-          {/* Tiny Filter Toggle */}
           <button
             onClick={() => setOnlyTiny(!onlyTiny)}
             className={`px-4 py-2.5 rounded-2xl text-xs font-bold border transition-all flex items-center justify-center gap-2 ${
@@ -97,11 +93,10 @@ export const ExpenseHistoryView: React.FC<ExpenseHistoryViewProps> = ({
             }`}
           >
             <Tag className="w-4 h-4" />
-            <span>केवल छोटे खर्च (Tiny Only)</span>
+            <span>Tiny Expenses Only</span>
           </button>
         </div>
 
-        {/* Category Pills */}
         <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
           {categories.map((cat) => (
             <button
@@ -119,12 +114,11 @@ export const ExpenseHistoryView: React.FC<ExpenseHistoryViewProps> = ({
         </div>
       </div>
 
-      {/* Expenses List */}
       <div className="space-y-3">
         {filteredExpenses.length === 0 ? (
           <div className="glass-card p-12 rounded-3xl text-center text-slate-400 space-y-2">
             <Receipt className="w-8 h-8 mx-auto opacity-50" />
-            <p className="text-sm font-bold">कोई खर्च नहीं मिला / No Expenses Found</p>
+            <p className="text-sm font-bold">No Expenses Found</p>
             <p className="text-xs">Try clearing search filters or add a new expense.</p>
           </div>
         ) : (
@@ -181,7 +175,6 @@ export const ExpenseHistoryView: React.FC<ExpenseHistoryViewProps> = ({
                   </div>
                 </div>
 
-                {/* Expanded Details */}
                 {isExpanded && (
                   <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs space-y-3 animate-in fade-in">
                     <div>

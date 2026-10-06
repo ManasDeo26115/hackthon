@@ -1,6 +1,6 @@
 import React from 'react';
 import confetti from 'canvas-confetti';
-import { JoinRequest, User, Trip } from '../../types';
+import { JoinRequest, Trip } from '../../types';
 import { X, Check, ShieldCheck, UserPlus, Clock, UserX } from 'lucide-react';
 import { formatDate } from '../../utils/formatters';
 
@@ -47,8 +47,8 @@ export const HostApprovalModal: React.FC<HostApprovalModalProps> = ({
           <span className="p-2 rounded-xl bg-saffron-500/10 text-saffron-600 dark:text-amber-400">
             <ShieldCheck className="w-5 h-5" />
           </span>
-          <h2 className="font-devanagari text-2xl font-black text-slate-900 dark:text-white">
-            होस्ट मंज़ूरी (Host Approvals) 👑
+          <h2 className="font-sans text-2xl font-black text-slate-900 dark:text-white">
+            Host Approvals 👑
           </h2>
         </div>
         <p className="text-xs text-slate-500 dark:text-slate-400 mb-6">
@@ -61,7 +61,7 @@ export const HostApprovalModal: React.FC<HostApprovalModalProps> = ({
               <UserPlus className="w-6 h-6" />
             </div>
             <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
-              कोई नया रिक्वेस्ट नहीं है / No Pending Requests
+              No Pending Requests
             </p>
             <p className="text-xs text-slate-400">
               All join requests have been processed. Share Trip ID <span className="font-mono font-bold text-saffron-600">{activeTrip.code}</span> with friends!
@@ -100,7 +100,7 @@ export const HostApprovalModal: React.FC<HostApprovalModalProps> = ({
                     title="Accept Member"
                   >
                     <Check className="w-4 h-4" />
-                    <span className="hidden sm:inline">स्वीकार</span>
+                    <span className="hidden sm:inline">Accept</span>
                   </button>
 
                   <button

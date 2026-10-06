@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, PlusCircle, Vault, CalendarCheck, Receipt, Scale } from 'lucide-react';
+import { LayoutDashboard, PlusCircle, Vault, CalendarCheck, Scale } from 'lucide-react';
 
 interface BottomNavProps {
   activeTab: string;
@@ -13,11 +13,11 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   onQuickAddClick
 }) => {
   const tabs = [
-    { id: 'dashboard', label: 'डैशबोर्ड', icon: LayoutDashboard },
-    { id: 'vault', label: 'तिजोरी', icon: Vault },
-    { id: 'add-expense', label: 'खर्च', icon: PlusCircle, isMain: true },
-    { id: 'planner', label: 'प्लांनर', icon: CalendarCheck },
-    { id: 'settlement', label: 'हिसाब', icon: Scale },
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'vault', label: 'Vault', icon: Vault },
+    { id: 'add-expense', label: 'Expense', icon: PlusCircle, isMain: true },
+    { id: 'planner', label: 'Planner', icon: CalendarCheck },
+    { id: 'settlement', label: 'Settlement', icon: Scale },
   ];
 
   return (
